@@ -59,6 +59,9 @@ $ tox -c infra-ci_for_role/tox.ini
 ## role ディレクトリ内に以下のパスでテスト用のディレクトリを作成する
 $ mkdir -p molecule/common/tests
 $ touch molecule/common/tests/test_role.py
+
+## また以下の .gitignore を用意しておいたほうが良い.
+$ echo "__pycache__" > molecule/common/tests/.gitignore
 ```
 
 そして以下の testinfra 用テスト test_role.py を編集する.<br>
