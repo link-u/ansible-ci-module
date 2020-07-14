@@ -17,12 +17,20 @@ else:
     execute_dir = script_dir
 
 
+## Verify tests dir
+__tests_dir = script_dir + "/../molecule/common/tests"
+if os.path.exists(__tests_dir) and os.path.isdir(__tests_dir):
+    tests_dir = os.path.abspath(__tests_dir)
+else:
+    tests_dir = script_dir + "/molecule/common/tests"
+
+
 ## Add env
 env = os.environ
 env["CREATE_YML"]    = script_dir + "/molecule/common/playbooks/create.yml"
 env["DESTROY_YML"]   = script_dir + "/molecule/common/playbooks/destroy.yml"
 env["CONVERGE_YML"]  = script_dir + "/molecule/common/playbooks/converge.yml"
-env["TESTINFRA_DIR"] = script_dir + "/molecule/common/tests"
+env["TESTINFRA_DIR"] = tests_dir
 env["ROLE_DIR"]      = os.path.abspath(script_dir + "/..")
 
 
