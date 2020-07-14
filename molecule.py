@@ -2,15 +2,16 @@
 import os
 import subprocess
 import sys
+import glob
 
 
 ## python script path and dir
-script_path   = os.path.abspath(__file__)
-script_dir    = os.path.dirname(script_path)
+script_path = os.path.abspath(__file__)
+script_dir  = os.path.dirname(script_path)
 
 
 ## Execute dir
-if os.path.exists(script_dir + "/../molecule"):
+if len(glob.glob(script_dir + "/../molecule/*/molecule.yml")) >= 1:
     execute_dir = os.path.abspath(script_dir + "/..")
 else:
     execute_dir = script_dir
