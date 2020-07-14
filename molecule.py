@@ -11,7 +11,11 @@ script_dir  = os.path.dirname(script_path)
 
 
 ## Execute dir
-if len(glob.glob(script_dir + "/../molecule/*/molecule.yml")) >= 1:
+__molecule_yml_files = [
+    p for p in glob.glob(script_dir + "/../molecule/*/molecule.yml")
+    if os.path.isfile(p)]
+if len(__molecule_yml_files) >= 1:
+
     execute_dir = os.path.abspath(script_dir + "/..")
 else:
     execute_dir = script_dir
