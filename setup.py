@@ -1,3 +1,3 @@
 from setuptools import setup
 
-setup(name='ci-ansible-roles')
+setup(name='ansible-ci-module')
