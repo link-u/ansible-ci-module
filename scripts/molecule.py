@@ -5,10 +5,9 @@ import sys
 import glob
 
 
-## python script path and dir
+## python script path and repo dir
 script_path   = os.path.abspath(__file__)
-scripts_dir   = os.path.dirname(script_path)
-repo_root_dir = os.path.abspath(scripts_dir + "/..")
+repo_root_dir = os.path.abspath(os.path.dirname(script_path) + "/..")
 
 
 ## Execute dir
