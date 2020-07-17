@@ -48,4 +48,5 @@ if (not "--base-config" in args) and (not "-c" in args):
 
 
 ## Execute molecule
-subprocess.run(args, cwd = execute_dir, env = env)
+proc = subprocess.run(args, cwd = execute_dir, env = env)
+sys.exit(proc.returncode)
