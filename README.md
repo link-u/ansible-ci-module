@@ -1,4 +1,4 @@
-# ansible role 用のインフラ CI
+# ansible 用のインフラ CI モジュール
 
 ## 1. 目次
 
@@ -22,7 +22,7 @@
 
 ## 2. 概要
 
-このツールは tox と molecule によるインフラ CI の共通部分をサブモジュールとして切り分けるためのもの.
+CI したい role のリポジトリにこのリポジトリをサブモジュールとして追加することでインフラ CI を提供する.
 
 主に以下のことができるようになる
 
@@ -36,6 +36,21 @@
 
 * LXD/LXC 環境の用意
 * tox のインストール (pip などでインストール)
+
+簡単なインストール方法を提示する. カスタマイズしたい場合は各々でやること.
+
+```
+## 必要な deb パッケージのインストール
+$ sudo apt update
+$ sudo apt install lxd lxd-tools qemu-block-extra python3 python3-pip python3-setuptools
+
+## LXD の初期設定
+$ sudo lxd init --auto
+$ sudo usermod -aG lxd $(whoami)
+
+## tox のインストール
+$ pip3 install tox
+```
 
 <br>
 
@@ -157,19 +172,18 @@ CI したい role によっては, デフォルトで用意しているシナリ
 ```
 ## role ディレクトリ内にシナリオを用意
 #  * molecule/<シナリオ名>/molecule.yml という命名規則で設置する.
-#  * シナリオにについては molecuel の公式ドキュメントを参照すること.
+#  * シナリオについては molecuel の公式ドキュメントを参照すること.
 #
 $ mkdir -p molecule/default/
 $ touch molecule/default/molecule.yml
 
 
 ## group_vars が必要な場合
-#  * testinfra からは group_vars は読み込めるが, role の defalts/main.yml は読み込めない.
-#  * group_vars 内にシンボリックリンクを貼ることで解決している.
+#  * testinfra からは group_vars を読み込めるが, role の defalts/main.yml は読み込めない.
+#  * group_vars 内にシンボリックリンクを貼ることで解決できる.
 #
 $ mkdir -p molecule/default/group_vars/all/
-$ ln -s ../../../../defaults/main.yml \
-        molecule/default/group_vars/all/00-defaults.yml
+$ ln -s ../../../../defaults/main.yml molecule/default/group_vars/all/00-defaults.yml
 ```
 
 この時のディレクトリ構成はこのようになる.
@@ -245,6 +259,8 @@ platforms:
   molecule --base-config ./molecule/common/base.yml <sub command>
   ```
 
+<br>
+
 * 自作 molecule シナリオの有無で作業ディレクトリを変更
 
   `<role directory>` に molecule シナリオが存在するかどうかで `molecule` コマンドの作業ディレクトリが変わる.
@@ -262,6 +278,8 @@ platforms:
     ## work directory
     <role directory>/
     ```
+
+<br>
 
 * 自作テストの有無で testinfra のディレクトリを変更
 
