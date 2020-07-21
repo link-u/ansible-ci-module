@@ -21,3 +21,9 @@
         wait_for_ipv4_addresses: true
         timeout: 600
       loop: "{{ molecule_yml.platforms }}"
+
+    - name: Create IPVLAN
+      command: >-
+        lxc exec {{ item.name }} -- ip a add {{ item.local_ipv4 }} dev eth0
+      when: item.local_ipv4 is defined
+      loop: "{{ molecule_yml.platforms }}"
