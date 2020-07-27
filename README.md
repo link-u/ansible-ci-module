@@ -116,8 +116,8 @@ $ tox -c ansible-ci-module/tox.ini
 $ mkdir -p molecule/common/tests
 $ touch molecule/common/tests/test_role.py  # テストファイルの名前は `test_*.py` という形式
 
-## また以下の .gitignore を用意しておいたほうが良い.
-$ echo "__pycache__" > molecule/common/tests/.gitignore
+## また以下の .gitignore の記述を <role directory> 直下に用意しておいたほうが良い.
+$ echo "__pycache__/" >> <role directory>/.gitignore
 ```
 
 この時のディレクトリ構成はこのようになる.
