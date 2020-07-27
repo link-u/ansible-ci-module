@@ -1,0 +1,5 @@
+---
+platforms:
+  - name: ${MOLECULE_DISTRO}-${ANSIBLE_VER}
+    source:
+      alias: ubuntu/${MOLECULE_DISTRO}/amd64
