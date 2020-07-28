@@ -13,8 +13,7 @@
           type: "{{ item.source.type | default('image') }}"
           mode: "{{ item.source.mode | default('pull') }}"
           server: >-
-            {{ item.source.server |
-               default('https://images.linuxcontainers.org') }}
+            {{ item.source.server | default('https://images.linuxcontainers.org') }}
           protocol: "{{ item.source.protocol | default('lxd') }}"
           alias: "{{ item.source.alias }}"
         profiles: ["default"]
