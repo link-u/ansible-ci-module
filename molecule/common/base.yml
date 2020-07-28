@@ -19,7 +19,8 @@ provisioner:
     diff: true
   inventory:
     links:
-      group_vars: group_vars
+      host_vars: ${HOST_VARS}
+      group_vars: ${GROUP_VARS}
 
 verifier:
   name: testinfra
