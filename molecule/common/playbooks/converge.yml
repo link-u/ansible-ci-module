@@ -2,5 +2,9 @@
 - name: Converge
   hosts: all
   become: yes
+  tasks:
+    - name: Check local_ipv4
+      debug:
+        var: local_ipv4
   roles:
     - { role: "{{ (playbook_dir ~ '/../../../..') | realpath }}" }
