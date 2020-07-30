@@ -1,2 +1,4 @@
 .tox
 *.egg-info
+molecule/common/cache/host_vars/*
+!molecule/common/cache/host_vars/.gitkeep

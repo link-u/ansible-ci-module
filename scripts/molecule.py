@@ -30,11 +30,22 @@ if __name__ == "__main__":
     else:
         tests_dir = repo_root_dir + "/molecule/common/tests"
 
+
+    ## group_vars
+    __group_vars_dir = repo_root_dir + "/../molecule/common/group_vars"
+    if os.path.exists(__group_vars_dir) and os.path.isdir(__group_vars_dir):
+        group_vars_dir = os.path.abspath(__group_vars_dir)
+    else:
+        group_vars_dir = repo_root_dir + "/molecule/common/group_vars"
+
+
     ## Add env
     env = os.environ
     env["CREATE_YML"]    = repo_root_dir + "/molecule/common/playbooks/create.yml"
     env["DESTROY_YML"]   = repo_root_dir + "/molecule/common/playbooks/destroy.yml"
     env["CONVERGE_YML"]  = repo_root_dir + "/molecule/common/playbooks/converge.yml"
+    env["HOST_VARS"]     = repo_root_dir + "/molecule/common/cache/host_vars/"
+    env["GROUP_VARS"]    = group_vars_dir
     env["TESTINFRA_DIR"] = tests_dir
     env["ROLE_DIR"]      = os.path.abspath(repo_root_dir + "/..")
 

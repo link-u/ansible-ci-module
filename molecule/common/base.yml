@@ -19,11 +19,13 @@ provisioner:
     diff: true
   inventory:
     links:
-      group_vars: group_vars
+      host_vars: ${HOST_VARS}
+      group_vars: ${GROUP_VARS}
 
 verifier:
   name: testinfra
-  directory: ${TESTINFRA_DIR}
+  additional_files_or_dirs:
+    - ${TESTINFRA_DIR}
   options:
     s: true  # pytest の -s を有効化. テスト時に print() の標準出力結果を見るため.
     v: true
