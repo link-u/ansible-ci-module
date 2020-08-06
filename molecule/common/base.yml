@@ -7,7 +7,7 @@ driver:
 
 lint: |
   set -e
-  ansible-lint ${ROLE_DIR}
+  ansible-lint ${ROLE_DIR} -c ${ROLE_DIR}/ansible-ci-module/ansible-lint.yml
 
 provisioner:
   name: ansible
