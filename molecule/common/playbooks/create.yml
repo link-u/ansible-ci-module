@@ -47,3 +47,9 @@
             {{ { 'local_ipv4': item.name ~ '.lxd' } |
               combine(item.host_vars | default({}), recursive=True) }}
       loop: "{{ molecule_yml.platforms }}"
+
+    - name: Limit memory of each container
+      command: >-
+        lxc config set {{ item.name }} limits.memory={{ item.lxc_limit_memory }}
+      when: item.lxc_limit_memory is defined
+      loop: "{{ molecule_yml.platforms }}"
