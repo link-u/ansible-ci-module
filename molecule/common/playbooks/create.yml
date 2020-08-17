@@ -48,6 +48,10 @@
               combine(item.host_vars | default({}), recursive=True) }}
       loop: "{{ molecule_yml.platforms }}"
 
+    - name: Execute lxd commands
+      command: "{{ molecule_yml.lxd_commands }}"
+      when: molecule_yml.lxd_commands is defined
+
     - name: Limit memory of each container
       command: >-
         lxc config set {{ item.name }} limits.memory={{ item.lxc_limit_memory }}
