@@ -8,7 +8,10 @@ if __name__ == "__main__":
     repo_root_dir = os.path.abspath(os.path.dirname(script_path) + "/..")
 
     ## Execute dir
-    execute_dir = repo_root_dir
+    if os.path.isfile(repo_root_dir + "/../tox.ini"):
+        execute_dir = os.path.abspath(repo_root_dir + "/..")
+    else:
+        execute_dir = repo_root_dir
 
     ## Echo TOX_ENV
     tox_args = ["tox", "-l", "-c", "tox.ini"]
