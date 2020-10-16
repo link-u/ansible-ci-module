@@ -2,6 +2,7 @@
 import os
 import subprocess
 import glob
+import json
 
 ## python script path and repo dir
 script_path   = os.path.abspath(__file__)
@@ -47,8 +48,8 @@ def matrix_scenarios():
 
 
 if __name__ == "__main__":
-    print("{" +
-        "\"tox_env\": [\"" + "\", \"".join(matrix_tox_envs()) + "\"], " +
-        "\"scenario\": [\"" + "\", \"".join(matrix_scenarios()) + "\"]" +
-        "}"
-    )
+    matrix_json = {
+        "tox_env": matrix_tox_envs(),
+        "scenario": matrix_scenarios()
+    }
+    print(json.dumps(matrix_json))
