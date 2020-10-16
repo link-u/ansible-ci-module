@@ -6,7 +6,7 @@ if __name__ == "__main__":
 
     ## python script path and repo dir
     script_dir  = os.path.dirname(os.path.abspath(__file__))
-    molecule_py = os.path.abspath(script_dir + "/molecule.py")
+    molecule_py = os.path.abspath(os.path.join(script_dir, "molecule.py"))
 
     ## 環境変数の取得
     env = os.environ

@@ -5,12 +5,12 @@ import glob
 
 ## python script path and repo dir
 script_path   = os.path.abspath(__file__)
-repo_root_dir = os.path.abspath(os.path.dirname(script_path) + "/..")
+repo_root_dir = os.path.abspath(os.path.join(os.path.dirname(script_path), ".."))
 
 def matrix_tox_envs():
     ## Execute dir
-    if os.path.isfile(repo_root_dir + "/../tox.ini"):
-        execute_dir = os.path.abspath(repo_root_dir + "/..")
+    if os.path.isfile(os.path.join(repo_root_dir, "..", "tox.ini")):
+        execute_dir = os.path.abspath(os.path.join(repo_root_dir, ".."))
     else:
         execute_dir = repo_root_dir
 
@@ -29,14 +29,14 @@ def matrix_scenarios():
     ## シナリオのリスト (ansible role ディレクトリで定義されているもの)
     scenarios_defined_by_role = [
         os.path.basename(os.path.dirname(p)) for p
-        in glob.glob(repo_root_dir + "/../molecule/*/molecule.yml")
+        in glob.glob(os.path.join(repo_root_dir, "..", "molecule", "*", "molecule.yml"))
         if os.path.isfile(p)
     ]
 
     ## シナリオのリスト (ansible-ci-module 内でデフォルトで定義してあるもの)
     scenarios_in_ansible_ci_modules = [
         os.path.basename(os.path.dirname(p)) for p
-        in glob.glob(repo_root_dir + "/molecule/*/molecule.yml")
+        in glob.glob(os.path.join(repo_root_dir, "molecule", "*", "molecule.yml"))
         if os.path.isfile(p)
     ]
 
