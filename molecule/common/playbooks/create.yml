@@ -57,3 +57,19 @@
         lxc config set {{ item.name }} limits.memory={{ item.lxc_limit_memory }}
       when: item.lxc_limit_memory is defined
       loop: "{{ molecule_yml.platforms }}"
+
+    - name: Setting local_ipv4 address
+      shell: >-
+        lxc exec {{ item.name }} -- bash -c
+        'echo "{{ netplan | to_json }}" > /etc/netplan/99-molecule.yaml' &&
+        lxc exec {{ item.name }} -- bash -c 'netplan apply'
+      vars:
+        netplan:
+          network:
+            version: 2
+            ethernets:
+              eth0:
+                addresses:
+                  - "{{ item.host_vars.local_ipv4 }}/{{ item.host_vars.local_ipv4_prefix | default('24') }}"
+      when: item.host_vars.local_ipv4 is defined
+      loop: "{{ molecule_yml.platforms }}"
