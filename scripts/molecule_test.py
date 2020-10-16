@@ -3,6 +3,7 @@ if __name__ == "__main__":
     import os
     import subprocess
     import sys
+    import shlex
 
     ## python script path and repo dir
     script_dir  = os.path.dirname(os.path.abspath(__file__))
@@ -18,6 +19,6 @@ if __name__ == "__main__":
     else:
         args = [molecule_py, "test", "-s", molecule_scenario]
 
-    print(" ".join(args))
+    print(shlex.join(args))
     proc = subprocess.run(args, env = env)
     sys.exit(proc.returncode)
