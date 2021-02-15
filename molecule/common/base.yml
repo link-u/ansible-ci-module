@@ -5,9 +5,7 @@ dependency:
 driver:
   name: lxd
 
-lint: |
-  set -e;
-  ansible-lint ${ROLE_DIR} -c ${ROLE_DIR}/ansible-ci-module/ansible-lint.yml;
+lint: ""
 
 provisioner:
   name: ansible
