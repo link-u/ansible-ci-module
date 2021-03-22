@@ -13,7 +13,7 @@ fi
 SCENARIOS=( "${@}" )
 
 ## role ディレクトリパスの取得
-SCRIPT_DIR="$(cd "$(dirname .)" && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "${0}")" && pwd)"
 ROLE_DIR="$(cd "${SCRIPT_DIR}/../../" && pwd)"
 
 ## 各シンボリックリンク
